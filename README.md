@@ -30,12 +30,14 @@ Ansible lance Vagrant
 Comparaison entre vagrant et terraform.
 
 #### Les réseaux
-Les 4 machines sont sur des réseaux différents
+Les 4 machines sont sur des réseaux différents :
+
     - le front est exposé au réseau public
     - le backend est privé uniquement au frontend
     - les DATA sont privé uniquement au backend
     - les NAS sont privé (configuration dans un fichier facilement adaptable pour chaque utilisateur : l’utilisateur indique le PATH de ses fichiers)
 
 #### Les environnements
+
     - Développement
     - Production
