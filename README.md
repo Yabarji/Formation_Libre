@@ -1,41 +1,38 @@
 # Formation_Libre
 
-# Projet Libre Dawan
+## Liferay Skeleton
+This project contains an Ansible playbook to set up a Liferay Portal server. It can either be used to set up a test, stage, production or any other environment, as well as provisioning a Vagrant VM for development purposes.
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+Setup/provisioning includes the installation of a Liferay Portal server and its prerequisites:
 
-## Projet Perso DAWAN
-##### Objectif :
-Obtenir avec un outil ou plusieur une architecture MVC démontable et ré-instable facilement et scalable.
+a MySQL database
+a Java 11 JDK
+a Liferay 7.2 Tomcat bundle.
 
-Faire avec vagrant et ansible une configuration de serveur
-##### Une architecture MVC
-    1. un serveur frontend pour installer Nginx
-        a. un partage pour le frontend qui se trouve sur un serveur DATA frontend ou partage NAS
-    2. un serveur backend pour installer Apache et eclipse
-        b. un partage pour le backend qui se trouve sur un serveur DATA backend ou partage NAS
+## Starting and using the VM
+See Vagrant Documentation how to work with Vagrant. Important commands are:
 
-    3. serveur DATA avec MySQL
-    4. serveur DATA NoSQL
-    
-## Les étapes:
-    Etape 1 : préparer le script Vagrant
-    Etape 2 : préparer le script Ansible
+vagrant up
+vagrant provision
+vagrant halt
+vagrant destroy
 
-#### Comparer les 2 cas 
-Vagrant lance Ansible 
-Ansible lance Vagrant
+## Using the VM
+After the VM is successfully started and provisioned, open http://localhost:8080/ in a browser and follow the requested steps. Sign in with the default admin user:
 
-#### Terraform
-Comparaison entre vagrant et terraform.
+a Email Address: test@liferay.com
+a Password: test
 
-#### Les réseaux
-Les 4 machines sont sur des réseaux différents :
+## Server setup with Ansible
+The Ansible playbook, that is used to provision the Vagrant VM, can also be used to set up the Liferay system (including MySQL and Java) on other environments (servers), too. For each additional environment, an inventory file ansible/inventory/[environment] has to be created. Replicate an existing inventory file and adjust its contents regarding to the new environment and/or see the documentation on the Ansible home page: Ansible Docs - Inventory. If the new environment requires custom configurations, create a file ansible/host_vars/[environment].yml and configure the variables that should be overwritten.
 
-    - le front est exposé au réseau public
-    - le backend est privé uniquement au frontend
-    - les DATA sont privé uniquement au backend
-    - les NAS sont privé (configuration dans un fichier facilement adaptable pour chaque utilisateur : l’utilisateur indique le PATH de ses fichiers)
+To run the setup call:
+
+ansible-playbook ansible/playbook.yml \
+                 -i ansible/inventory/[environment]
+
+## Variables for Liferay version
+The default variables define the (currently) latest version of the Liferay Portal server for installation. If a server should be set up with another version, those variables can be overwritten, e.g. in the regarding ansible/host_vars/[environment].yml file for the server to be set up. Prefedined variables for known versions can be found in the directory ansible/roles/liferay/vars/versions and can simply be overwritten in the ansible/host_vars/[environment].yml file.
 
 #### Les environnements
 

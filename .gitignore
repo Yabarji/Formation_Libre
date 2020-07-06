@@ -1,0 +1,15 @@
+### Files to be ignored by Git ###
+
+# Liferay auto deploy dir
+/liferay-deploy/*
+
+# Vagrant
+/.vagrant
+
+# Eclipse
+/.classpath
+/.project
+/.settings
+
+# Custom
+/temp
